@@ -28,8 +28,9 @@ p=game_count()
 while jumbled_word:
     #using while loop to randomise the word completely
     l=len(jumbled_word)
-    jumble += jumbled_word[random.randrange(l)]
-    jumbled_word = jumbled_word[:random.randrange(l)] + jumbled_word[(random.randrange(l)+ 1):]
+    x=random.randrange(l)
+    jumble += jumbled_word[x]
+    jumbled_word = jumbled_word[:x] + jumbled_word[(x+ 1):]
 print("The jumble up word is:", jumble)
 print("Now start guessing!")
 guess = input("Please enter your guess: ")
@@ -42,15 +43,16 @@ if guess == correct_word:
     p.winner()
     p.tota()
     print("Thanks for playing with us:)")
-    b=input("Would you like to play again? (Y/N)")
+    b=input("Would you like to play again? (Y/N): ")
 while b!="N":
     jumbled_word = random.choice(list_of_words)
     correct_word = jumbled_word
     jumble = ""
     while jumbled_word:
         l=len(jumbled_word)
-        jumble += jumbled_word[random.randrange(l)]
-        jumbled_word = jumbled_word[:random.randrange(l)] + jumbled_word[(random.randrange(l) + 1):]
+        x=random.randrange(l)
+        jumble += jumbled_word[x]
+        jumbled_word = jumbled_word[:x] + jumbled_word[(x+ 1):]
     print("The jumble up word is:", jumble)
     print("Now start guessing again!")
     guess = input("Please enter your guess: ")
@@ -58,12 +60,12 @@ while b!="N":
         print("Oops,incorrect choice,please try again")
         p.tota()
         guess = input("Please enter your guess: ")
-        if guess == correct_word:
-            print("Vola, you nailed it!")
-            game_count.winner(game_count)
-            p.tota()
-            print("Thanks for playing with us:)")
-            b=input("Would you like to play again? (Y/N)")
+    if guess == correct_word:
+        print("Vola, you nailed it!")
+        game_count.winner(game_count())
+        p.tota()
+        print("Thanks for playing with us:)")
+        b=input("Would you like to play again? (Y/N): ")
 #after completing all the games,printing data of all games played
 if b=="N":
     print("Hope you had a wonderful time here. Here is your game record:-")
@@ -75,6 +77,7 @@ if b=="N":
             starrating=int(input("On scale of 0-10 how would you rate us: "))
             assert starrating<=10
             assert starrating>=0
+            print("Thank you have a wonderful day")
         except:
             print("Oops wrong input.")
     elif s=="N":
